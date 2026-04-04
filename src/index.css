@@ -1,0 +1,62 @@
+:root {
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+/* для добавления темной темы
+@media (prefers-color-scheme: dark) {
+  :root {
+  }
+} */
+
+#root {
+  width: 1440px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-family: var(--heading);
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 56px;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+/* временные стили для кнопки */
+button {
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  align-self: center;
+}
