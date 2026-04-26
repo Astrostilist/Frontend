@@ -1,0 +1,31 @@
+.card {
+  width: 260px;
+  border: 1px solid #BDBDBD;
+  border-radius: 5px;
+  cursor: default;
+}
+
+.card--clickable {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+}
+
+.chipHidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.chipWithOpacity {
+  transition: opacity 0.2s;
+}
