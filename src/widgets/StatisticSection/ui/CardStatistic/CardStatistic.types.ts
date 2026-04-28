@@ -26,9 +26,3 @@ export interface ChipConfig {
   icon?: React.ReactElement;
   opacity?: number;
 }
-
-export interface UseCardConfigReturn {
-  title: string;
-  chipConfig: ChipConfig | null;
-  formattedValue: string;
-}
