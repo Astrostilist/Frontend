@@ -1,5 +1,4 @@
 import type { CardType } from './CardStatistic/CardStatistic.types';
-
 export interface StatisticData {
   id: string;
   type: CardType;
@@ -9,7 +8,6 @@ export interface StatisticData {
   title?: string;
   unit?: string;
 }
-
 export interface StatisticSectionProps {
   data: StatisticData[];
   loading?: boolean;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Skeleton, Box, Typography } from '@mui/material';
-import { CardStatistic } from './CardStatistic';
+import { CardStatistic } from './CardStatistic/CardStatistic';
 import type { CardStatisticProps } from './CardStatistic/CardStatistic.types';
 import type { StatisticSectionProps } from './StatisticSection.types';
 import styles from './StatisticSection.module.css';

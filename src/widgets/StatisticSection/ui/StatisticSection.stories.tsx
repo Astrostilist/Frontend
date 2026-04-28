@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { StatisticSection, type StatisticData } from './index';
+import { StatisticSection } from './StatisticSection';
+import { type StatisticData } from './StatisticSection.types';
 
 const meta: Meta<typeof StatisticSection> = {
   title: 'Widgets/StatisticSection/StatisticSection',
@@ -12,11 +13,11 @@ const meta: Meta<typeof StatisticSection> = {
     loading: {
       control: 'boolean',
       description: 'Состояние загрузки',
-    }, 
+    },
     skeletonCount: {
       control: 'number',
-      description: 'Количество карточек-скелетонов'
-    }
+      description: 'Количество карточек-скелетонов',
+    },
   },
 };
 
