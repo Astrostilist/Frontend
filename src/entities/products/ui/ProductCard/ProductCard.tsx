@@ -34,7 +34,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       sx={{
         width: '360px',
         borderRadius: 1,
-        boxShadow: '11px 15px -7px',
+        boxShadow: '24',
         position: 'relative',
       }}
     >
