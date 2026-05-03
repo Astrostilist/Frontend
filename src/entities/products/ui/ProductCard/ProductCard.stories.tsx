@@ -1,4 +1,3 @@
-// entities/products/ui/ProductCard/ProductCard.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ProductCard } from './ProductCard';
 import { Box } from '@mui/material';
@@ -37,7 +36,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default состояние
 export const Default: Story = {
   args: {
     mode: 'default',
@@ -48,7 +46,6 @@ export const Default: Story = {
   },
 };
 
-// Full состояние
 export const FullWithDefaultData: Story = {
   args: {
     mode: 'full',
@@ -63,7 +60,6 @@ export const FullWithDefaultData: Story = {
   },
 };
 
-// Full состояние с длинными тегами
 export const FullWithLongTags: Story = {
   args: {
     mode: 'full',
@@ -74,7 +70,6 @@ export const FullWithLongTags: Story = {
   },
 };
 
-// Галерея всех состояний
 export const Gallery: Story = {
   render: () => (
     <Box sx={{ display: 'flex', gap: 1}}>

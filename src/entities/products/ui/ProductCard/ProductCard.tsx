@@ -21,7 +21,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     title: 'Белая футболка Classic',
     price: 1100,
     tags: ['classic', 'comfort', 'high-quality', 'essential'],
-    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
+    imageUrl: 'https://picsum.photos/id/20/300/300',
   };
 
   const displayTitle = isFull ? (title ?? fullData.title) : 'Название товара';
@@ -99,7 +99,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: 1.3
+                gap: 1.3,
               }}
             >
               <ImageNotSupportedIcon />
