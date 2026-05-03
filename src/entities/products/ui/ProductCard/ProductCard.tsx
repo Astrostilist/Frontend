@@ -102,8 +102,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 gap: 1.3,
               }}
             >
-              <ImageNotSupportedIcon />
-              <Typography variant="overline" color="text.secondary">
+              <ImageNotSupportedIcon color="disabled" />
+              <Typography variant="overline" color="textDisabled" sx={{ letterSpacing: '1px' }}>
                 НЕТ ИЗОБРАЖЕНИЯ
               </Typography>
             </Box>

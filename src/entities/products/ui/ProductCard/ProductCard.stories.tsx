@@ -49,7 +49,7 @@ export const Default: Story = {
 export const FullWithDefaultData: Story = {
   args: {
     mode: 'full',
-    imageUrl: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
+    imageUrl: 'https://picsum.photos/id/20/300/300',
   },
   parameters: {
     docs: {
