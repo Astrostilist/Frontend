@@ -5,13 +5,11 @@ export interface SidebarUser {
 
 export interface SidebarItem {
   label: string;
-  icon: React.ReactNode;
+  icon: React.ElementType;
   selected?: boolean;
   onClick?: () => void;
 }
 
 export interface SidebarProps {
-  companyName: string;
   user: SidebarUser;
-  items: SidebarItem[];
 }

@@ -15,6 +15,16 @@
     padding: 12px 16px 16px 16px;
 }
 
+.header {
+    display: flex;
+    margin: 0;
+    padding: 28px 28px 4px 28px;
+}
+
+.logo {
+    width: 111px;
+    height: 44px;
+}
 
 .footer {
     margin-top: auto;

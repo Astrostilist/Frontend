@@ -15,7 +15,7 @@ const StyledListItemButton = styled(ListItemButton)(() => ({
   alignItems: 'center',
   gap: 8,
   borderRadius: 8,
-  border: '1px solid transparent',
+  outline: '1px solid transparent',
   transition: 'all 0.2s ease',
 
   // // Линия внизу
