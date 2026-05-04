@@ -7,7 +7,7 @@ import type { CustomeListItemProps } from "./CustomeListItem.types";
 
 const StyledListItemButton = styled(ListItemButton)(() => ({
   position: 'relative',
-  width: 260,
+  width: 223,
   height: 48,
   padding: '0',
   boxSizing: 'border-box',
