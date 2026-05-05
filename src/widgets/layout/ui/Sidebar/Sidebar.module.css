@@ -1,0 +1,48 @@
+.sidebar {
+
+    box-shadow:
+    0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+
+    width: 255px;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+
+    justify-content: flex-start;
+    padding: 12px 16px 16px 16px;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    flex-shrink: 0;
+}
+
+.header {
+    display: flex;
+    margin: 0;
+    padding: 28px 28px 4px 28px;
+}
+
+.logo {
+    width: 111px;
+    height: 44px;
+}
+
+.footer {
+    margin-top: auto;
+}
+
+.user {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: start;
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+}
