@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 16px;
+  background-color: #fff;
+  max-width: 352px;
+  width: 100%;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.infoBlock {
+  display: flex;
+  align-items: center;
+}
+
+.fileDetails {
+  margin-left: 16px;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 230px;
+}
+
+.sizeAndStatus {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.namefile {
+    text-align: left;
+    line-height: 175%;
+}
+
+.separator {
+  line-height: 143%;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 8px;
+}
+
+.statusText {
+  line-height: 143%;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.loading {
+  margin-top: 4px;
+  border-radius: 2px;
+  width: 200px;
+}
