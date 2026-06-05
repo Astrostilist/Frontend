@@ -18,24 +18,37 @@ import {
 import './styles.css'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import InfoIconTooltip from '../../../shared/ui/InfoIconTooltip/InfoIconTooltip'
-import '../../../shared/ui/InfoIconTooltip/InfoIconTooltip.css'
 
-export const RuleEditForm = ({ initialData, onSave }) => {
-  const [ruleName, setRuleName] = useState(initialData?.ruleName || '')
-  const [ruleNameFocused, setRuleNameFocused] = useState(false)
+// Определение интерфейса для пропсов
+interface RuleEditFormProps {
+  initialData?: {
+    ruleName?: string
+    astroConditions?: {
+      moon?: string
+      libra?: string
+    }
+    tags?: string[]
+    priority?: number
+  }
+  onSave?: (data: any) => void
+}
 
-  const [astroConditions, setAstroConditions] = useState({
+export const RuleEditForm: React.FC<RuleEditFormProps> = ({ initialData, onSave }) => {
+  const [ruleName, setRuleName] = useState<string>(initialData?.ruleName || '')
+  const [astroConditions, setAstroConditions] = useState<{
+    moon: string
+    libra: string
+  }>({
     moon: initialData?.astroConditions?.moon || '',
     libra: initialData?.astroConditions?.libra || ''
   })
+  const [tags, setTags] = useState<string[]>(initialData?.tags || [])
+  const [tagInput, setTagInput] = useState<string>('')
+  const [priority, setPriority] = useState<number>(initialData?.priority || 1)
+  const [slot, setSlot] = useState<'base' | 'active'>('base')
+  const [openTags, setOpenTags] = useState<boolean>(false)
 
-  const [tags, setTags] = useState(initialData?.tags || [])
-  const [tagInput, setTagInput] = useState('')
-  const [priority, setPriority] = useState(initialData?.priority || 1)
-  const [slot, setSlot] = useState('base')
-  const [openTags, setOpenTags] = useState(false)
-
-  const handleAstroChange = (field, value) => {
+  const handleAstroChange = (field: 'moon' | 'libra', value: string) => {
     setAstroConditions(prev => ({ ...prev, [field]: value }))
   }
 
@@ -55,13 +68,13 @@ export const RuleEditForm = ({ initialData, onSave }) => {
     setSlot(prev => (prev === 'active' ? 'base' : 'active'))
   }
 
-  const availableTags = ['Тег1', 'Тег2', 'Тег3', 'Тег4', 'Тег5', 'Тег6']
+  const availableTags: string[] = ['Тег1', 'Тег2', 'Тег3', 'Тег4', 'Тег5', 'Тег6']
 
-  const handleDeleteTag = (tagToDelete) => {
+  const handleDeleteTag = (tagToDelete: string) => {
     setTags(prev => prev.filter(t => t !== tagToDelete))
   }
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault()
       const trimmed = tagInput.trim()
@@ -102,11 +115,12 @@ export const RuleEditForm = ({ initialData, onSave }) => {
 
   return (
     <Box className="section" sx={{ padding: 2, maxWidth: 600, margin: '0 auto' }}>
-
+      {/* Заголовок */}
       <Typography variant="h6" gutterBottom>
         Форма редактирования
       </Typography>
 
+      {/* Название правила */}
       <Box sx={{ mb: 3 }}>
         <Typography
           variant="subtitle2"
@@ -117,15 +131,14 @@ export const RuleEditForm = ({ initialData, onSave }) => {
         </Typography>
         <TextField
           fullWidth
+          label="Название правила"
           placeholder="Введите название"
           value={ruleName}
           onChange={(e) => setRuleName(e.target.value)}
-          onFocus={() => setRuleNameFocused(true)}
-          onBlur={() => setRuleNameFocused(false)}
-          label={ruleNameFocused ? 'Название правила' : ''}
         />
       </Box>
 
+      {/* Астрологические условия */}
       <Box sx={{ mb: 3 }}>
         <Typography
           variant="subtitle2"
@@ -133,14 +146,10 @@ export const RuleEditForm = ({ initialData, onSave }) => {
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
           Астрологическое условие
-          <InfoIconTooltip
-            tooltipText="Укажите астрологический фактор, при наступлении которого правило начнет влиять на подбор"
-            tooltipWidth={200}
-            tooltipHeight={50}
-          />
+          <InfoIconTooltip tooltipText="Выберите планету и знак зодиака" />
         </Typography>
         <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-
+          {/* Планета */}
           <FormControl sx={{ minWidth: 200 }} size="small">
             <InputLabel>Луна</InputLabel>
             <Select
@@ -158,7 +167,7 @@ export const RuleEditForm = ({ initialData, onSave }) => {
               ))}
             </Select>
           </FormControl>
-
+          {/* Знак */}
           <FormControl sx={{ minWidth: 200 }} size="small">
             <InputLabel>Знак</InputLabel>
             <Select
@@ -179,6 +188,7 @@ export const RuleEditForm = ({ initialData, onSave }) => {
         </Box>
       </Box>
 
+      {/* Теги товаров */}
       <Box sx={{ mb: 3 }}>
         <Typography
           variant="subtitle2"
@@ -186,28 +196,27 @@ export const RuleEditForm = ({ initialData, onSave }) => {
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
           Теги товаров
-          <InfoIconTooltip
-            tooltipText="Выберите характеристики и стили одежды, которые система будет рекомендовать пользователю при срабатывании этого условия"
-            tooltipWidth={200}
-            tooltipHeight={64}
-          />
+          <InfoIconTooltip tooltipText="Добавляйте теги для классификации товаров" />
         </Typography>
         <Autocomplete
           multiple
           freeSolo
           options={availableTags}
           value={tags}
-          onChange={(event, newValue) => {
-            setTags(newValue)
+          onChange={(_event, newValue) => {
+            if (newValue) {
+              const filtered = newValue.filter((val): val is string => typeof val === 'string')
+              setTags(filtered)
+            }
           }}
           inputValue={tagInput}
-          onInputChange={(event, newInputValue) => {
+          onInputChange={(_event, newInputValue) => {
             setTagInput(newInputValue)
           }}
           open={openTags}
           onOpen={() => setOpenTags(true)}
           onClose={() => setOpenTags(false)}
-          renderTags={(value, getTagProps) =>
+          renderTags={(value: string[], getTagProps) =>
             value.map((option, index) => (
               <Chip
                 key={option}
@@ -246,6 +255,7 @@ export const RuleEditForm = ({ initialData, onSave }) => {
         />
       </Box>
 
+      {/* Приоритет */}
       <Box sx={{ mb: 3 }}>
         <Typography
           variant="subtitle2"
@@ -253,16 +263,13 @@ export const RuleEditForm = ({ initialData, onSave }) => {
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
           Приоритет
-          <InfoIconTooltip
-            tooltipText="Установите вес правила от 1 до 100, 
-            где 1 – высший приоритет. Если у пользователя одновременно совпадет несколько астрологических условий, система отдаст предпочтение правилам с наиболее высоким приоритетом"
-            tooltipWidth={200}
-            tooltipHeight={106}
-          />
+          <InfoIconTooltip tooltipText="Настройте приоритет правила" />
         </Typography>
         <Slider
           value={priority}
-          onChange={(e, newValue) => setPriority(newValue)}
+          onChange={(_e, newValue) => {
+            if (typeof newValue === 'number') setPriority(newValue)
+          }}
           min={1}
           max={100}
           valueLabelDisplay="auto"
@@ -273,6 +280,7 @@ export const RuleEditForm = ({ initialData, onSave }) => {
         />
       </Box>
 
+      {/* Статус */}
       <Box
         sx={{
           display: 'flex',
@@ -286,15 +294,12 @@ export const RuleEditForm = ({ initialData, onSave }) => {
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
         >
           Статус правила
-          <InfoIconTooltip
-            tooltipText="Переключатель для активации или временного отключения правила"
-            tooltipWidth={200}
-            tooltipHeight={36}
-          />
+          <InfoIconTooltip tooltipText="Активировать или деактивировать правило" />
         </Typography>
         <Switch checked={isActive} onChange={handleToggle} />
       </Box>
 
+      {/* Кнопка сохранить */}
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button
           variant="contained"
