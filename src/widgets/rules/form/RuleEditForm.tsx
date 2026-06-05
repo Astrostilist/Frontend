@@ -5,7 +5,6 @@ import {
   Switch,
   Typography,
   Box,
-  Chip,
   Autocomplete,
   InputAdornment,
   IconButton,
@@ -15,7 +14,7 @@ import {
   MenuItem,
   Button
 } from '@mui/material'
-import './styles.css'
+import type { AutocompleteRenderInputParams } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import InfoIconTooltip from '../../../shared/ui/InfoIconTooltip/InfoIconTooltip'
 
@@ -70,10 +69,6 @@ export const RuleEditForm: React.FC<RuleEditFormProps> = ({ initialData, onSave 
 
   const availableTags: string[] = ['Тег1', 'Тег2', 'Тег3', 'Тег4', 'Тег5', 'Тег6']
 
-  const handleDeleteTag = (tagToDelete: string) => {
-    setTags(prev => prev.filter(t => t !== tagToDelete))
-  }
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault()
@@ -86,29 +81,12 @@ export const RuleEditForm: React.FC<RuleEditFormProps> = ({ initialData, onSave 
   }
 
   const planets = [
-    'Меркурий',
-    'Венера',
-    'Марс',
-    'Юпитер',
-    'Сатурн',
-    'Уран',
-    'Нептун',
-    'Плутон'
+    'Меркурий', 'Венера', 'Марс', 'Юпитер', 'Сатурн', 'Уран', 'Нептун', 'Плутон'
   ]
 
   const zodiacSigns = [
-    'Овен',
-    'Телец',
-    'Близнецы',
-    'Рак',
-    'Лев',
-    'Дева',
-    'Весы',
-    'Скорпион',
-    'Стрелец',
-    'Козерог',
-    'Водолей',
-    'Рыбы'
+    'Овен', 'Телец', 'Близнецы', 'Рак', 'Лев', 'Дева', 'Весы', 'Скорпион',
+    'Стрелец', 'Козерог', 'Водолей', 'Рыбы'
   ]
 
   const isActive = slot === 'active'
@@ -155,7 +133,7 @@ export const RuleEditForm: React.FC<RuleEditFormProps> = ({ initialData, onSave 
             <Select
               value={astroConditions.moon}
               label="Луна"
-              onChange={(e) => handleAstroChange('moon', e.target.value)}
+              onChange={(e) => handleAstroChange('moon', e.target.value as string)}
             >
               <MenuItem value="">
                 <em>Выберите планету</em>
@@ -173,7 +151,7 @@ export const RuleEditForm: React.FC<RuleEditFormProps> = ({ initialData, onSave 
             <Select
               value={astroConditions.libra}
               label="Знак"
-              onChange={(e) => handleAstroChange('libra', e.target.value)}
+              onChange={(e) => handleAstroChange('libra', e.target.value as string)}
             >
               <MenuItem value="">
                 <em>Выберите знак зодиака</em>
@@ -216,39 +194,29 @@ export const RuleEditForm: React.FC<RuleEditFormProps> = ({ initialData, onSave 
           open={openTags}
           onOpen={() => setOpenTags(true)}
           onClose={() => setOpenTags(false)}
-          renderTags={(value: string[], getTagProps) =>
-            value.map((option, index) => (
-              <Chip
-                key={option}
-                label={option}
-                {...getTagProps({ index })}
-                onDelete={() => handleDeleteTag(option)}
-              />
-            ))
-          }
-          renderInput={(params) => (
+          renderInput={(params: AutocompleteRenderInputParams) => (
             <TextField
               {...params}
               label="Добавить тег..."
               placeholder="Добавить тег..."
               onKeyDown={handleKeyDown}
-              InputProps={{
-                ...params.InputProps,
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      onClick={() => setOpenTags(prev => !prev)}
-                      size="small"
-                    >
-                      <ExpandMoreIcon
-                        style={{
-                          transform: openTags ? 'rotate(180deg)' : 'rotate(0deg)',
-                          transition: 'transform 0.2s'
-                        }}
-                      />
-                    </IconButton>
-                  </InputAdornment>
-                )
+              // Используем slotProps для endAdornment
+              slotProps={{
+                input: {
+                  ...params.slotProps?.input,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={() => setOpenTags(prev => !prev)} size="small">
+                        <ExpandMoreIcon
+                          style={{
+                            transform: openTags ? 'rotate(180deg)' : 'rotate(0deg)',
+                            transition: 'transform 0.2s'
+                          }}
+                        />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }
               }}
             />
           )}
