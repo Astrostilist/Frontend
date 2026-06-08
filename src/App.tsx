@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Sidebar } from './widgets/layout/ui/Sidebar/Sidebar';
 import { LogsTable } from './widgets/logs/ui/table/LogsTable';
-
 function App() {
 
   useEffect(() => {
