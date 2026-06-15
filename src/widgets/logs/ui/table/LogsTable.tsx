@@ -25,21 +25,31 @@ import { LogsTableRow } from "./components/LogsTableRow";
 export const LogsTable = () => {
     const [statusFilter, setStatusFilter] = useState<LogStatus | "">("");
     const [dateRange, setDateRange] = useState<[string | null, string | null]>([null, null]);
+    const [appliedDateRange, setAppliedDateRange] = useState<[string | null, string | null]>([null, null]);
 
-    const { data, isLoading, error } = useQuery({
-        queryKey: ['logs', statusFilter, dateRange],
+
+    const { data, isLoading, error, } = useQuery({
+        queryKey: ['logs', statusFilter, appliedDateRange[0], appliedDateRange[1]],
         queryFn: () => fetchLogs({ 
             status: statusFilter || undefined,
-            from: dateRange[0] || undefined,
-            to: dateRange[1] || undefined,
-            limit: 100 
+            from: appliedDateRange[0] || undefined,
+            to: appliedDateRange[1] || undefined,
+            limit: 50, 
         }),
+        enabled: true,
     });
 
     const items: LogItem[] = data?.data?.items || [];
+
+
+    const handleReset = () => {
+        setStatusFilter("");
+        setDateRange([null, null]);
+        setAppliedDateRange([null, null]);
+    }
     
     if (isLoading) return <Typography sx={{ p: 3 }}>Загрузка логов...</Typography>;
-    if (error) return <Typography sx={{ p: 3, color: "error.main" }}>Ошибка загрузки</Typography>;
+    if (error) return <Typography sx={{ p: 3, color: "error.main" }}>{String(error)}</Typography>;
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -50,20 +60,18 @@ export const LogsTable = () => {
 
                 <Box sx={{ display: "flex", gap: 2, mb: 3, alignItems: "center", flexWrap: "wrap" }}>
                     <StatusFilter
-                    value={statusFilter}
-                    onChange={setStatusFilter}
+                        value={statusFilter}
+                        onChange={setStatusFilter}
                     />
                  
                     <DateRangeFilter
-                    value={dateRange}
-                    onChange={setDateRange}
+                        value={dateRange}
+                        onChange={setDateRange}
+                        onApply={setAppliedDateRange}
                     />
 
-                    <Button 
-                        variant="outlined" 
-                        onClick={() => setDateRange([null, null])}
-                    >
-                        Сбросить даты
+                    <Button variant="outlined" onClick={handleReset}>
+                        Очистить фильтры
                     </Button>
                 </Box>
 
