@@ -21,6 +21,8 @@ import { DateRangeFilter } from "./components/DateRangeFilter";
 import { LogsTableHeader } from "./components/LogsTableHeader";
 import { StatusFilter } from "./components/StatusFilter";
 import { LogsTableRow } from "./components/LogsTableRow";
+import { ErrorState } from "./components/ErrorState";
+import { EmptyState } from "./components/EmptyState";
 
 export const LogsTable = () => {
     const [statusFilter, setStatusFilter] = useState<LogStatus | "">("");
@@ -28,7 +30,7 @@ export const LogsTable = () => {
     const [appliedDateRange, setAppliedDateRange] = useState<[string | null, string | null]>([null, null]);
 
 
-    const { data, isLoading, error, } = useQuery({
+    const { data, isLoading, error, refetch } = useQuery({
         queryKey: ['logs', statusFilter, appliedDateRange[0], appliedDateRange[1]],
         queryFn: () => fetchLogs({ 
             status: statusFilter || undefined,
@@ -49,8 +51,7 @@ export const LogsTable = () => {
     }
     
     if (isLoading) return <Typography sx={{ p: 3 }}>Загрузка логов...</Typography>;
-    if (error) return <Typography sx={{ p: 3, color: "error.main" }}>{String(error)}</Typography>;
-
+    
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Box sx={{ p: 3 }}>
@@ -79,18 +80,27 @@ export const LogsTable = () => {
                     <Table>
                         <LogsTableHeader />
                         <TableBody>
-                            {items.length === 0 ? (
-                                <TableRow>
-                                    <TableCell colSpan={6} align="center" sx={{ py: 4 }}>
-                                        Логов пока нет
-                                    </TableCell>
-                                </TableRow>
-                            ) : (
-                                items.map((log) => (
-                                    <LogsTableRow key={log.request_id} log={log} />
-                                ))
-                            )}
-                        </TableBody>
+    {error ? (
+        <TableRow>
+            <TableCell colSpan={6}>
+                <ErrorState onRetry={() => refetch()} />
+            </TableCell>
+        </TableRow>
+    ) : items.length === 0 ? (
+        <TableRow>
+            <TableCell colSpan={6}>
+                <EmptyState />
+            </TableCell>
+        </TableRow>
+    ) : (
+        items.map((log) => (
+            <LogsTableRow
+                key={log.request_id}
+                log={log}
+            />
+        ))
+    )}
+</TableBody>
                     </Table>
                 </TableContainer>
             </Box>
