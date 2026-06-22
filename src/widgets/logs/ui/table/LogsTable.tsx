@@ -24,6 +24,7 @@ import { LogsTableRow } from "./components/LogsTableRow";
 import { ErrorState } from "./components/ErrorState";
 import { EmptyState } from "./components/EmptyState";
 import { TablePagination } from "./components/TablePagination";
+import { exportToCSV } from "../../../../shared/utils/exportToCSV";
 
 export const LogsTable = () => {
     const [statusFilter, setStatusFilter] = useState<LogStatus | "">("");
@@ -61,6 +62,22 @@ export const LogsTable = () => {
         setAppliedDateRange([null, null]);
         setCurrentPage(1)
     }
+
+    const hadleExportCSV = () => {
+        exportToCSV(
+            allItems,
+            "logs",
+             [
+        { key: "request_id", label: "Request ID" },
+        { key: "user_id", label: "User ID" },
+        { key: "scenario",      label: "Scenario" },
+        { key: "status", label: "Status" },
+        { key: "error_message", label: "Error Reason" },
+        { key: "created_at", label: "Created At" },
+        { key: "completed_at", label: "Completed At" },
+    ]
+        );
+    };
     
     if (isLoading) return <Typography sx={{ p: 3 }}>Загрузка логов...</Typography>;
     
@@ -91,7 +108,7 @@ export const LogsTable = () => {
                     </Button>
 
                     <Button variant="outlined" color="primary" sx={{ ml: 'auto' }}
-                        onClick={() => alert('Экспорт CSV в разработке')}>Экспорт CSV</Button>
+                        onClick={hadleExportCSV}>Экспорт CSV</Button>
                 </Box>
 
                 <TableContainer component={Paper}>
