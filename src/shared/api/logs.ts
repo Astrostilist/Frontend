@@ -29,7 +29,7 @@ export const fetchLogs = async (params: FetchLogsParams = {}): Promise<LogsRespo
     `/api/v1/admin/logs?${queryParams.toString()}`,
     {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('adminToken')}`,
       },
     },
   );
