@@ -5,7 +5,6 @@ import {
     TextField,
     Typography,
     Alert,
-    CircularProgress,
 } from "@mui/material";
 
 import { loginAdmin } from "../shared/api/auth";
@@ -35,14 +34,14 @@ export const LoginPage = () => {
             if (response?.data?.access_token) {
                 login(response.data.access_token);
                 navigate("/logs", { replace: true });
-            } else {
-                setError("Не удалось войти");
-            }
-        } catch (err: any) {
-            setError(err?.message || "Неверный email или пароль");
-        } finally {
-            setLoading(false);
-        }
+                } else {
+                        setError("Не удалось войти");
+                        }
+                } catch (err: any) {
+                    setError(err?.message || "Неверный email или пароль");
+                } finally {
+                    setLoading(false);
+                    }
     };
 
     return (
@@ -89,7 +88,7 @@ export const LoginPage = () => {
                 disabled={loading}
                 sx={{ mt: 3 }}
             >
-                {loading ? <CircularProgress size={24} color="inherit" /> : "Войти"}
+                 Войти
             </Button>
         </Paper>
     );
