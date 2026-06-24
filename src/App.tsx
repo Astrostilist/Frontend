@@ -16,7 +16,7 @@ function App() {
             avatar: '',
           }}
         />
-      </div>
+      </div> 
     </>
   );
 }
