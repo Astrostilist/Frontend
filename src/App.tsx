@@ -1,23 +1,11 @@
-import { useEffect } from 'react';
-import { Sidebar } from './widgets/layout/ui/Sidebar/Sidebar';
-
+import { AuthProvider } from './app/providers/AuthProvider';
+import { AppRouter } from './app/router/AppRouter';
 function App() {
-
-  useEffect(() => {
-    localStorage.setItem('token', 'my-test-token');
-  }, []);
-
+ 
   return (
-    <>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <Sidebar
-          user={{
-            name: 'Ирина С.',
-            avatar: '',
-          }}
-        />
-      </div> 
-    </>
+    <AuthProvider>
+      <AppRouter />  
+    </AuthProvider>
   );
 }
 

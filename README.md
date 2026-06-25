@@ -54,3 +54,30 @@ React 18 + TypeScript + Vite
 - `fix: ` - исправление ошибок
 - `refactor: ` - рефакторинг кода
 - `chore: ` - изменения не связанные с продакшен кодом, например тесты, документация, настройка сборки
+
+
+/* работа с беком скачать репрозиторий бека в одну папку с репрозиториев фронта
+установила go и docer
+потом установить cp .env.local.template .env создали ключ
+ потом на беке в файле middleware.go заменила функцию на это, func AdminAuthMiddleware(cache *memcache.Client, secretTokenAdmin string) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// ==================== ВРЕМЕННЫЙ BYPASS ДЛЯ РАЗРАБОТКИ ====================
+			// TODO: Удалить после того, как бэкенд сделает нормальную dev-авторизацию
+			ctx := context.WithValue(r.Context(), jwtClaimsKey, jwt.MapClaims{
+				"role": "admin",
+				"jti":  "dev-bypass",
+			})
+			next.ServeHTTP(w, r.WithContext(ctx))
+			return
+			// =====================================================================
+		})
+	}
+}
+
+и запускаем бек
+sudo docker compose -f docker-compose.dev.yaml up -d postgres nats memcached jaeger
+sudo docker ps
+SECRET_TOKEN_ADMIN=local-admin-token go run ./cmd
+
+и потом запускаем в отдельно окне фронт
