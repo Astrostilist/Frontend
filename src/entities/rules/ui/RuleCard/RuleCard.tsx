@@ -8,7 +8,7 @@
 //             contentText="something something something something"
 //             priority="2"
 //         />
-//       </div>
+//  </div>
 
 import React from 'react';
 import type { RuleCardProps } from './types';
@@ -29,6 +29,7 @@ import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 export const RuleCard: React.FC<RuleCardProps> = ({
+  id,
   isActive,
   ruleName,
   contentText,
@@ -55,13 +56,11 @@ export const RuleCard: React.FC<RuleCardProps> = ({
         '&:hover': {
           backgroundColor: disabled ? '#fff' : 'grey.500',
         },
-
         '&:hover .ruleCard-actions': {
           opacity: 1,
           visibility: 'visible',
           pointerEvents: 'auto',
         },
-
         '&[data-active="true"] .ruleCard-actions': {
           opacity: 1,
           visibility: 'visible',
@@ -158,17 +157,17 @@ export const RuleCard: React.FC<RuleCardProps> = ({
               transition: 'opacity 0.18s ease, visibility 0.18s ease',
             }}
           >
-            <IconButton size="small" onClick={onDelete} aria-label="delete rule">
+            <IconButton size="small" onClick={() => onDelete?.(id)} aria-label="delete rule">
               <DeleteIcon sx={{ fontSize: 18 }} />
             </IconButton>
 
-            <IconButton size="small" onClick={onEdit} aria-label="edit rule">
+            <IconButton size="small" onClick={() => onEdit?.(id)} aria-label="edit rule">
               <EditIcon sx={{ fontSize: 18 }} />
             </IconButton>
 
             <IconButton
               size="small"
-              onClick={onToggleActive}
+              onClick={() => onToggleActive?.(id)}
               aria-label={isActive ? 'pause rule' : 'activate rule'}
             >
               {isActive ? (
