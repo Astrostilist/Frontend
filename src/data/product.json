@@ -1,0 +1,134 @@
+{
+  "message": "Products fetched successfully",
+  "data": {
+    "items": [
+      {
+        "ext_product_id": "1480",
+        "sku": "7d608615-0924-11ef-8e0e-005056b6c1cd#f72cc21a-e140-11ee-8e0e-005056b6c1cd",
+        "name": "Платье TABI",
+        "price": 22000,
+        "category": "Платья",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/e0e/kxh26qj5erqjxnav964bb1ao31mg9drc.jpg"
+        ],
+        "url": "https://lubanikishina.com/catalog/platya/plate_tabi_2/",
+        "article": "D/TABI/white",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "1905",
+        "sku": "aad7a35e-fe30-11ee-8e0e-005056b6c1cd#f72cc218-e140-11ee-8e0e-005056b6c1cd",
+        "name": "Плащ Понд (POND) чёрный",
+        "price": 35500,
+        "category": "Тренчи",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/e27/w42a1lkxxant2sqssz1c7poomrzr39op.png"
+        ],
+        "url": "https://lubanikishina.com/catalog/trenchi/plashch_pond_pond_chyernyy/",
+        "article": "TRCT/POND/black",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "1942",
+        "sku": "4170ce2a-4a69-11ef-8e10-005056b6c1cd#f72cc217-e140-11ee-8e0e-005056b6c1cd",
+        "name": "Платье LOU",
+        "price": 23000,
+        "category": "Платья",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/5e7/09n9fpurki3fu5d5zcugic3035l8nweq.jpg"
+        ],
+        "url": "https://lubanikishina.com/catalog/platya/plate_lou_4/",
+        "article": "D/LOU/lightpink",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "1477",
+        "sku": "7d608615-0924-11ef-8e0e-005056b6c1cd#f72cc217-e140-11ee-8e0e-005056b6c1cd",
+        "name": "Платье TABI",
+        "price": 22000,
+        "category": "Платья",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/e0e/kxh26qj5erqjxnav964bb1ao31mg9drc.jpg"
+        ],
+        "url": "https://lubanikishina.com/catalog/platya/plate_tabi_2/",
+        "article": "D/TABI/white",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "1427",
+        "sku": "b8551ef1-0482-11ef-8e0e-005056b6c1cd#f72cc219-e140-11ee-8e0e-005056b6c1cd",
+        "name": "Платье TOY",
+        "price": 24000,
+        "category": "Платья",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/9cf/6oatqgv25w01ht1luvvyvpq7584awa1k.jpg"
+        ],
+        "url": "https://lubanikishina.com/catalog/platya/plate_toy/",
+        "article": "D/TOY/quilted/emerald",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "1904",
+        "sku": "aad7a35e-fe30-11ee-8e0e-005056b6c1cd#f72cc217-e140-11ee-8e0e-005056b6c1cd",
+        "name": "Плащ Понд (POND) чёрный",
+        "price": 35500,
+        "category": "Тренчи",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/e27/w42a1lkxxant2sqssz1c7poomrzr39op.png"
+        ],
+        "url": "https://lubanikishina.com/catalog/trenchi/plashch_pond_pond_chyernyy/",
+        "article": "TRCT/POND/black",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "2001",
+        "sku": "12345678-0000-11ef-8e0e-005056b6c1cd#abcdef12-1234-11ef-8e0e-005056b6c1cd",
+        "name": "Новый товар 1",
+        "price": 15000,
+        "category": "Новинки",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/sample/sample1.jpg"
+        ],
+        "url": "https://lubanikishina.com/catalog/novinki/novyj-tovar-1/",
+        "article": "NVT/001",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      },
+      {
+        "ext_product_id": "2002",
+        "sku": "87654321-0000-11ef-8e0e-005056b6c1cd#654321fe-1234-11ef-8e0e-005056b6c1cd",
+        "name": "Новый товар 2",
+        "price": 18000,
+        "category": "Новинки",
+        "images": [
+          "https://lubanikishina.com/upload/iblock/sample/sample2.jpg"
+        ],
+        "url": "https://lubanikishina.com/catalog/novinki/novyj-tovar-2/",
+        "article": "NVT/002",
+        "tags": [],
+        "created_at": "2026-06-26T17:18:41.492163Z",
+        "updated_at": "2026-06-26T17:18:41.492163Z"
+      }
+    ],
+    "metadata": {
+      "current_page": 1,
+      "page_size": 50,
+      "first_page": 1,
+      "last_page": 14,
+      "total_records": 667
+    }
+  }
+}

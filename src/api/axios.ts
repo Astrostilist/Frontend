@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com', // заглушка, нужно получить путь от бэка и можно указать через env
+  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:8080', // дефолтный адрес, если env не задан
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,0 +1,13 @@
+.imputform {
+display: flex;
+flex-wrap: nowrap;
+gap: 365px;
+}
+
+.search {
+    width: 600px;
+}
+
+.table {
+    text-align: left;
+}

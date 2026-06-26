@@ -3,7 +3,7 @@ import { LoginPage } from "../../pages/LoginPage";
 import { LogsPage } from "../../pages/LogsPage";
 import { AdminLayout } from "../../widgets/layout/AdminLayout";
 import { ProtectedRoute } from "./ProtectedRoute";
-
+import { CatalogPage } from "../../pages/CatalogPage";
 export const AppRouter = () => {
     return (
         <Routes>
@@ -18,6 +18,18 @@ export const AppRouter = () => {
                 }
             >
                 <Route index element={<LogsPage />} />
+            </Route>
+
+            {/* Новый маршрут для каталога */}
+            <Route
+                path="/catalog"
+                element={
+                    <ProtectedRoute>
+                        <AdminLayout />
+                    </ProtectedRoute>
+                }
+            >
+                <Route index element={<CatalogPage />} />
             </Route>
 
             <Route path="/" element={<Navigate to="/login" replace />} />
