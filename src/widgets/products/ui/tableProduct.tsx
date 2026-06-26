@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import rawData from '../../../data/product.json'
-
+import React, { useState, useEffect } from 'react';
+import rawData from '../../../data/product.json';
 import {
   Typography,
   MenuItem,
@@ -17,66 +16,64 @@ import {
   Paper,
   Button,
   Chip,
-} from '@mui/material'
-import { SearchField } from './components/search'
-import styles from './tableProduct.module.css'
-import Pagination from './components/Pagination'
+} from '@mui/material';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import { SearchField } from './components/search';
+import styles from './tableProduct.module.css';
+import Pagination from './components/Pagination';
 
 interface Product {
-  ext_product_id: string
-  name: string
-  price: number
-  tags: string[]
-  images: string[]
+  ext_product_id: string;
+  name: string;
+  price: number;
+  tags: string[];
+  images: string[];
 }
 
 export const TableProduct: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  const [tag, setTag] = useState<string>('Все')
-  const [products, setProducts] = useState<Product[]>([])
-  const [page, setPage] = useState<number>(0)
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5)
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [tag, setTag] = useState<string>('Все');
+  const [products, setProducts] = useState<Product[]>([]);
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
 
-  const tags = ['Все', 'Электроника', 'Одежда', 'Дом', 'Книги']
-  const productsData: Product[] = rawData?.data?.items || []
+  const tags = ['Все', 'Электроника', 'Одежда', 'Дом', 'Книги'];
+  const productsData: Product[] = rawData?.data?.items || [];
 
   useEffect(() => {
-    setProducts(productsData)
-  }, [productsData])
+    setProducts(productsData);
+  }, [productsData]);
 
   const handleSearchChange = (value: string) => {
-    setSearchTerm(value)
-  }
+    setSearchTerm(value);
+  };
 
-const handleTagChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-  const value = event.target.value;
-  if (typeof value === 'string') {
-    setTag(value);
-  }
-};
-
+  // Исправленный обработчик с правильным типом MUI Select
+  const handleTagChange = (event: SelectChangeEvent<string>) => {
+    setTag(event.target.value || 'Все');
+  };
 
   const handleChangePage = (_event: unknown, newPage: number) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTag = tag === 'Все' || product.tags.some(
       (t) => t.toLowerCase() === tag.toLowerCase()
-    )
-    return matchesSearch && matchesTag
-  })
+    );
+    return matchesSearch && matchesTag;
+  });
 
   const displayedRows = filteredProducts.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
-  )
+  );
 
   return (
     <>
@@ -117,6 +114,7 @@ const handleTagChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       </Box>
 
       <TableContainer component={Paper} style={{ marginTop: '20px' }}>
+        {/* Остальная часть компонента остается без изменений */}
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -180,5 +178,5 @@ const handleTagChange = (event: React.ChangeEvent<{ value: unknown }>) => {
         />
       </TableContainer>
     </>
-  )
-}
+  );
+};
