@@ -28,12 +28,14 @@ export const Sidebar = ({ user }: SidebarProps) => {
         })}
       </List>
 
-      <div className={styles.footer}>
-        <div className={styles.user}>
-          <img src={user.avatar || defaultAvatar} alt="user" className={styles.avatar} />
-          <Typography variant="body1">{user.name}</Typography>
+      {user && (
+        <div className={styles.footer}>
+          <div className={styles.user}>
+            <img src={user.avatar || defaultAvatar} alt="user" className={styles.avatar} />
+            <Typography variant="body1">{user.name}</Typography>
+          </div>
         </div>
-      </div>
+      )}
     </aside>
   );
 };

@@ -24,11 +24,9 @@
 } */
 
 #root {
-  width: 1440px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  min-height: 100svh;
+  width: 100%;
+  margin: 0;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -54,9 +52,3 @@ p {
   margin: 0;
 }
 
-/* временные стили для кнопки */
-button {
-  padding: 10px 10px;
-  margin-bottom: 10px;
-  align-self: center;
-}

@@ -11,5 +11,5 @@ export interface SidebarItem {
 }
 
 export interface SidebarProps {
-  user: SidebarUser;
+  user?: SidebarUser | null;
 }
