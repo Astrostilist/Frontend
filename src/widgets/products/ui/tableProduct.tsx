@@ -11,11 +11,11 @@ import {
   TableRow,
   Paper
 } from '@mui/material';
-import { SearchField } from '../ui/components/search';
+import { SearchField } from './components/search';
 import styles from './tableProduct.module.css';
-import Pagination from '../ui/components/pagination';
-import { TagFilter } from '../ui/components/tagFilter';
-import { ProductRow } from '../ui/components/productRow';
+import Pagination from './components/pagination';
+import { TagFilter } from './components/tagFilter';
+import { ProductRow } from './components/productRow';
 import type { SelectChangeEvent } from '@mui/material/Select';
 
 interface Product {
