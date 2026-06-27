@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableCell, TableRow, Button } from '@mui/material';
-import { TagsChipGroup } from './TagsChipGroup';
+import { TagsChipGroup } from './tagsChipGroup';
 
 interface ProductRowProps {
   product: {
