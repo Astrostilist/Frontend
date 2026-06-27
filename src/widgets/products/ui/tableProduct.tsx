@@ -13,9 +13,9 @@ import {
 } from '@mui/material';
 import { SearchField } from './components/search';
 import styles from './tableProduct.module.css';
-import  Pagination  from './components/pagination';
-import { TagFilter } from './components/tagFilter';
-import { ProductRow } from './components/productRow';
+import  Pagination  from './components/pagination.tsx';
+import { TagFilter } from './components/tagFilter.tsx';
+import { ProductRow } from './components/productRow.tsx';
 import type { SelectChangeEvent } from '@mui/material/Select';
 
 interface Product {
