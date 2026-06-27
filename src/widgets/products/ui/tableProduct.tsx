@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import rawData from '../../../data/product.json';
 import {
   Typography,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel,
   Box,
   Table,
   TableBody,
@@ -13,14 +9,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Button,
-  Chip,
+  Paper
 } from '@mui/material';
-import type { SelectChangeEvent } from '@mui/material/Select';
-import { SearchField } from './components/search';
+import { SearchField } from '../ui/components/search';
 import styles from './tableProduct.module.css';
-import Pagination from './components/Pagination';
+import Pagination from '../ui/components/Pagination';
+import { TagFilter } from '../ui/components/TagFilter';
+import { ProductRow } from '../ui/components/ProductRow';
+import type { SelectChangeEvent } from '@mui/material/Select';
 
 interface Product {
   ext_product_id: string;
@@ -33,24 +29,21 @@ interface Product {
 export const TableProduct: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [tag, setTag] = useState<string>('Все');
-  const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [hiddenTags, setHiddenTags] = useState<Record<string, string[]>>({});
 
-  const tags = ['Все', 'Электроника', 'Одежда', 'Дом', 'Книги'];
   const productsData: Product[] = rawData?.data?.items || [];
-
-  useEffect(() => {
-    setProducts(productsData);
-  }, [productsData]);
+  const allTags = Array.from(new Set(productsData.flatMap(p => p.tags)));
 
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
+    setPage(0);
   };
 
-  // Исправленный обработчик с правильным типом MUI Select
   const handleTagChange = (event: SelectChangeEvent<string>) => {
     setTag(event.target.value || 'Все');
+    setPage(0);
   };
 
   const handleChangePage = (_event: unknown, newPage: number) => {
@@ -62,7 +55,28 @@ export const TableProduct: React.FC = () => {
     setPage(0);
   };
 
-  const filteredProducts = products.filter((product) => {
+  const toggleHiddenTags = useCallback((productId: string) => {
+    setHiddenTags(prev => {
+      const product = productsData.find(p => p.ext_product_id === productId);
+      if (!product) return prev;
+
+      const existingHidden = prev[productId] || [];
+
+      if (existingHidden.length > 0) {
+        const newHiddenTags = { ...prev };
+        delete newHiddenTags[productId];
+        return newHiddenTags;
+      } else {
+        const allHiddenTags = product.tags.slice(2);
+        return {
+          ...prev,
+          [productId]: allHiddenTags
+        };
+      }
+    });
+  }, [productsData]);
+
+  const filteredProducts = productsData.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTag = tag === 'Все' || product.tags.some(
       (t) => t.toLowerCase() === tag.toLowerCase()
@@ -76,45 +90,32 @@ export const TableProduct: React.FC = () => {
   );
 
   return (
-    <>
+    <Box>
       <Typography className={styles.table} variant="h6" gutterBottom>
         Таблица с товарами
       </Typography>
 
-      <Box
-        className={styles.imputform}
-        sx={{
-          display: 'flex',
-          gap: '16px',
-          alignItems: 'center',
-          marginBottom: '20px',
-        }}
-      >
-        <Box sx={{ flex: { xs: 1, sm: 2 } }}>
-          <SearchField value={searchTerm} onChange={handleSearchChange} />
+      <Box className={styles.imputform} sx={{
+        display: 'flex',
+        gap: '16px',
+        alignItems: 'center',
+        marginBottom: '20px',
+      }}>
+        <Box className={styles.search}>
+          <SearchField
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
         </Box>
 
-        <Box sx={{ flex: { xs: 1, sm: 1 } }}>
-          <FormControl fullWidth>
-            <InputLabel>Тег</InputLabel>
-            <Select
-              value={tag}
-              onChange={handleTagChange}
-              label="Тег"
-              sx={{ minWidth: 120 }}
-            >
-              {tags.map((tagOption) => (
-                <MenuItem key={tagOption} value={tagOption}>
-                  {tagOption}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Box>
+        <TagFilter
+          tag={tag}
+          allTags={allTags}
+          onTagChange={handleTagChange}
+        />
       </Box>
 
       <TableContainer component={Paper} style={{ marginTop: '20px' }}>
-        {/* Остальная часть компонента остается без изменений */}
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -128,55 +129,30 @@ export const TableProduct: React.FC = () => {
           <TableBody>
             {displayedRows.length > 0 ? (
               displayedRows.map((product) => (
-                <TableRow key={product.ext_product_id}>
-                  <TableCell>
-                    <img
-                      src={product.images && product.images.length > 0 ? product.images[0] : 'https://via.placeholder.com/50'}
-                      alt={product.name}
-                      style={{ width: '50px' }}
-                    />
-                  </TableCell>
-                  <TableCell>{product.name}</TableCell>
-                  <TableCell style={{ alignItems: 'center' }}>
-                    {product.price}
-                    <span style={{ marginLeft: 4 }}>₽</span>
-                  </TableCell>
-                  <TableCell>
-                    {product.tags.map((tag) => (
-                      <Chip
-                        key={tag}
-                        label={tag}
-                        size="small"
-                        color="primary"
-                        variant="outlined"
-                        sx={{ mr: 1, mb: 1 }}
-                      />
-                    ))}
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="text" color="primary">
-                      Открыть
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                <ProductRow
+                  key={product.ext_product_id}
+                  product={product}
+                  hiddenTags={hiddenTags}
+                  onToggleHiddenTags={toggleHiddenTags}
+                />
               ))
             ) : (
               <TableRow>
                 <TableCell colSpan={5} align="center">
-                  Нет товаров
-                </TableCell>
-              </TableRow>
+                Нет товаров по вашему запросу
+              </TableCell>
+            </TableRow>
             )}
           </TableBody>
         </Table>
-        <Pagination
-          count={Math.ceil(filteredProducts.length / rowsPerPage)}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
       </TableContainer>
-    </>
+      <Pagination
+        count={Math.ceil(filteredProducts.length / rowsPerPage)}
+        page={page}
+        rowsPerPage={rowsPerPage}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Box>
   );
 };

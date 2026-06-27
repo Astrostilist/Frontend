@@ -2,9 +2,9 @@ import React from 'react';
 import { TablePagination } from '@mui/material';
 
 interface PaginationProps {
-  count: number; // всего элементов
-  page: number; // текущая страница
-  rowsPerPage: number; // элементов на страницу
+  count: number;
+  page: number;
+  rowsPerPage: number;
   onPageChange: (event: unknown, newPage: number) => void;
   onRowsPerPageChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
