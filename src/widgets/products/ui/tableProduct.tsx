@@ -13,9 +13,9 @@ import {
 } from '@mui/material';
 import { SearchField } from './components/search';
 import styles from './tableProduct.module.css';
-import Pagination from './components/pagination.tsx';
-import { TagFilter } from './components/tagFilter.tsx';
-import { ProductRow } from './components/productRow.tsx';
+import Pagination from './components/pagination';
+import { TagFilter } from './components/tagFilter';
+import { ProductRow } from './components/productRow';
 import type { SelectChangeEvent } from '@mui/material/Select';
 
 interface Product {
@@ -95,12 +95,7 @@ export const TableProduct: React.FC = () => {
         Таблица с товарами
       </Typography>
 
-      <Box className={styles.imputform} sx={{
-        display: 'flex',
-        gap: '16px',
-        alignItems: 'center',
-        marginBottom: '20px',
-      }}>
+      <Box className={styles.imputform}>
         <Box className={styles.search}>
           <SearchField
             value={searchTerm}
