@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableProduct } from '../widgets/products/ui/tableProduct'; // укажите правильный путь к вашему компоненту
+import { TableProduct } from '../widgets/products/ui/TableProduct'; // укажите правильный путь к вашему компоненту
 
 export const CatalogPage: React.FC = () => {
   return (

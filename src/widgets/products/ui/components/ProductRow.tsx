@@ -2,6 +2,7 @@ import React from 'react';
 import { TableCell, TableRow, Button } from '@mui/material';
 import { TagsChipGroup } from './tagsChipGroup';
 
+
 interface ProductRowProps {
   product: {
     ext_product_id: string;

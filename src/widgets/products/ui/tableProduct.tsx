@@ -11,12 +11,14 @@ import {
   TableRow,
   Paper
 } from '@mui/material';
-import { SearchField } from './components/search';
+
 import styles from './tableProduct.module.css';
-import Pagination from './components/pagination';
+import type { SelectChangeEvent } from '@mui/material/Select';
+import { SearchField } from './components/search';
 import { TagFilter } from './components/tagFilter';
 import { ProductRow } from './components/productRow';
-import type { SelectChangeEvent } from '@mui/material/Select';
+import Pagination from './components/pagination';
+
 
 interface Product {
   ext_product_id: string;
