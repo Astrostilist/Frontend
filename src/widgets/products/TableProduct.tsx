@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import rawData from '../../../data/product.json';
+import rawData from '../../data/product.json';
 import {
   Typography,
   MenuItem,
@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
 import styles from './tableProduct.module.css';
-import { SearchField } from './components/Search';
+import { SearchField } from './Search';
 
 interface Product {
   ext_product_id: string;
