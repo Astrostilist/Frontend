@@ -19,8 +19,8 @@ import {
   Pagination,
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
-import { SearchField } from './components/search';
 import styles from './tableProduct.module.css';
+import { SearchField } from './components/Search';
 
 interface Product {
   ext_product_id: string;
