@@ -1,0 +1,15 @@
+.imputform {
+display: flex;
+flex-wrap: nowrap;
+gap: 365px;
+align-items: 'center';
+margin-bottom: '20px';
+}
+
+.search {
+    width: 600px;
+}
+
+.table {
+    text-align: left;
+}
