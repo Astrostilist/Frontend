@@ -6,10 +6,12 @@ export interface SidebarUser {
 export interface SidebarItem {
   label: string;
   icon: React.ElementType;
+  path: string;
   selected?: boolean;
   onClick?: () => void;
 }
 
 export interface SidebarProps {
   user?: SidebarUser | null;
+  isAuthenticated: boolean;
 }

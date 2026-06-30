@@ -9,6 +9,7 @@ export const MainLayout = () => {
       style={{
         display: 'flex',
         height: '100vh',
+        outline: "2px solid red",
       }}
     >
       <Sidebar
@@ -20,12 +21,12 @@ export const MainLayout = () => {
               }
             : undefined
         }
+        isAuthenticated = {isAuthenticated}
       />
 
       <main
         style={{
           flex: 1,
-          padding: '20px',
           overflow: 'auto',
           backgroundColor: '#f9f9f9',
         }}
