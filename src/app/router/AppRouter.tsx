@@ -3,6 +3,8 @@ import { WelcomePage } from '../../pages/WelcomePage';
 import { RegisterPage } from '../../pages/RegisterPage';
 import { LoginPage } from '../../pages/LoginPage';
 import { LogsPage } from '../../pages/LogsPage';
+import { CatalogPage } from '../../pages/CatalogPage';
+import { RulesEditorPage } from '../../pages/RulesEditorPage';
 import { MainLayout } from '../../layouts/MainLayout';
 import { ProtectedRoute } from './ProtectedRoute';
 
@@ -22,6 +24,9 @@ export const AppRouter = () => {
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
             <Route path="/logs" element={<LogsPage />} />
+            <Route path="/catalog" element={<CatalogPage />} />
+            <Route path="/rules" element={<RulesEditorPage />} />
+            
             <Route path="/" element={<Navigate to="/logs" replace />} />
         </Route>
       </Route>

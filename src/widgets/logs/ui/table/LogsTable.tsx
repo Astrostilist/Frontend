@@ -83,7 +83,7 @@ export const LogsTable = () => {
     
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <Box sx={{ p: 3 }}>
+            <>
                 <Typography variant="h6" gutterBottom
                     sx={{
                         textAlign: 'left'
@@ -149,7 +149,7 @@ export const LogsTable = () => {
                         setCurrentPage(1);
                     }}
                 />
-            </Box>
+            </>
         </LocalizationProvider>
     );
 };
